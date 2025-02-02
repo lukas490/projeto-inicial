@@ -22,8 +22,10 @@ public class listagem extends javax.swing.JFrame {
         initComponents();
         
       produtosDao dao = new produtosDao();
+      dao.conectar();
       List<produtos> r = dao.consultar();
       preencheTabela(r);
+      dao.desconectar();
     }
     
     public void preencheTabela(List<produtos> r){
