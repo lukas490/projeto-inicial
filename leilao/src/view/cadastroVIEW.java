@@ -151,10 +151,11 @@ public class cadastroVIEW extends javax.swing.JFrame {
                 }
                 dao.desconectar();
                 
+               
+    }
         listagem novaTela = new listagem();
         novaTela.setVisible(true);
         this.dispose();
-    }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

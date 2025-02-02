@@ -44,26 +44,35 @@ public class produtosDao {
         }
     }
     
-    public List<produtos> consultar (){
-        List<produtos> lista = new ArrayList<>();
+    public List<produtos> consultar() {
+    List<produtos> lista = new ArrayList<>();
     try {
+        
         st = conn.prepareStatement("SELECT * FROM produtos");
+        
         
         rs = st.executeQuery();
         
         while (rs.next()) {
             produtos p = new produtos();
-            p.setId(Integer.parseInt(rs.getString("id")));
+            p.setId(rs.getInt("id")); 
             p.setNome(rs.getString("nome"));
-            p.setValor(Double.parseDouble(rs.getString("valor")));
+            p.setValor(rs.getDouble("valor")); 
             p.setStatus(rs.getString("status"));
             lista.add(p);
         }
     } catch (SQLException ex) {
         System.out.println("Erro ao consultar: " + ex.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (st != null) st.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao fechar recursos: " + e.getMessage());
+        }
     }
     return lista;
-    }
+}
     
     public void desconectar(){
         try {
