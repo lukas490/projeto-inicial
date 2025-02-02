@@ -4,6 +4,10 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import leilao.produtos;
+import leilao.produtosDao;
+
 /**
  *
  * @author Lucas Boff
@@ -32,6 +36,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         txtValor = new javax.swing.JTextField();
+        btnCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,6 +48,13 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("VALOR:");
+
+        btnCadastrar.setText("CADASTRAR");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -62,6 +74,10 @@ public class cadastroVIEW extends javax.swing.JFrame {
                 .addContainerGap(107, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(95, 95, 95))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(155, 155, 155)
+                .addComponent(btnCadastrar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,7 +91,9 @@ public class cadastroVIEW extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 97, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(btnCadastrar)
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -91,6 +109,36 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+       produtos p = new produtos();
+       produtosDao dao = new produtosDao();
+            boolean status;
+            int resposta;
+            
+            p.setNome(txtNome.getText());
+            p.setValor(Double.parseDouble(txtValor.getText()));
+            
+            
+            dao = new produtosDao();
+            
+            status = dao.conectar();
+            if(status == false){
+                JOptionPane.showMessageDialog(null,"Erro de conexão");
+            }else{
+                resposta = dao.salvar(p);
+                if(resposta == 1){
+                    JOptionPane.showMessageDialog(null,"Dados incluidos com sucesso");
+                    txtNome.setText("");
+                    txtValor.setText("");
+                    
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null,"Erro ao tentar inserir dados");
+                }
+                dao.desconectar();
+    }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,6 +176,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

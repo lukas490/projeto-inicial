@@ -27,9 +27,10 @@ public class produtosDao {
     public int salvar(produtos p){
     int status;
         try {
-            st = conn.prepareStatement("INSERT INTO produtos(nome, valor) VALUES(?,?)");
+            st = conn.prepareStatement("INSERT INTO produtos(nome, valor, status) VALUES(?,?,?)");
             st.setString(1,p.getNome());
             st.setDouble(2,p.getValor());
+            st.setString(3,"A venda");
             
            
             status = st.executeUpdate();
