@@ -44,7 +44,7 @@ public class produtosDao {
         }
     }
     
-    public List<produtos> consultar (String nome){
+    public List<produtos> consultar (){
         List<produtos> lista = new ArrayList<>();
     try {
         st = conn.prepareStatement("SELECT * FROM produtos");

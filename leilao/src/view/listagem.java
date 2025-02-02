@@ -4,6 +4,11 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import leilao.produtos;
+import leilao.produtosDao;
+
 /**
  *
  * @author Lucas Boff
@@ -15,6 +20,29 @@ public class listagem extends javax.swing.JFrame {
      */
     public listagem() {
         initComponents();
+        
+      produtosDao dao = new produtosDao();
+      List<produtos> r = dao.consultar();
+      preencheTabela(r);
+    }
+    
+    public void preencheTabela(List<produtos> r){
+    String colunas[] = {"id", "nome", "valor", "status"};
+    String dados[][] = new String[r.size()][colunas.length];
+
+    int i=0;
+    for(produtos p: r){
+        dados[i] = new String[]{ 
+            String.valueOf(p.getId()), 
+            p.getNome(), 
+            String.valueOf(p.getValor()), 
+            p.getStatus(),
+        };
+        i++;
+    }
+
+    DefaultTableModel model = new DefaultTableModel(dados, colunas);
+    tbProdutos.setModel(model);
     }
 
     /**
