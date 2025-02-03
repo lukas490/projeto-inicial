@@ -74,13 +74,13 @@ public class produtosDao {
     return lista;
 }
     
-    public int venderProduto(produtos p){
+    public int venderProduto(int id){
         int status;
 
             try {
             st = conn.prepareStatement("UPDATE produtos SET status = ? where id = ?");
             st.setString(1, "Vendido");
-            st.setInt(2,p.getId());
+            st.setInt(2,id);
             status = st.executeUpdate();
             return status; 
 
