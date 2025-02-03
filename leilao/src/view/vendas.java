@@ -23,7 +23,7 @@ public class vendas extends javax.swing.JFrame {
         
       produtosDao dao = new produtosDao();
       dao.conectar();
-      List<produtos>  g = dao.consultar();
+      List<produtos>  g = dao.listarProdutosVendidos();
       preencheTabela(g);
       dao.desconectar();
     }

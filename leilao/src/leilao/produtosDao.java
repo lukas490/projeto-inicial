@@ -95,7 +95,7 @@ public class produtosDao {
     List<produtos> lista = new ArrayList<>();
     try {
         
-        st = conn.prepareStatement("SELECT * FROM produtos WHERE status = Vendido");
+        st = conn.prepareStatement("SELECT * FROM produtos WHERE status = 'Vendido' ");
         
         
         rs = st.executeQuery();
