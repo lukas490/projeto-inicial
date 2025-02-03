@@ -48,6 +48,8 @@
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="btnCadastro" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="btnConsultarVendas" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnVenderProduto" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -67,6 +69,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnVenderProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnConsultarVendas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -117,6 +120,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVenderProdutoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnConsultarVendas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CONSULTAR VENDAS"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsultarVendasActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
