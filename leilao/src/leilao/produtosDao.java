@@ -74,6 +74,54 @@ public class produtosDao {
     return lista;
 }
     
+    public int venderProduto(int id){
+        int status;
+
+            try {
+            st = conn.prepareStatement("UPDATE produtos SET status = ? where id = ?");
+            st.setString(1, "Vendido");
+            st.setInt(2,id);
+            status = st.executeUpdate();
+            return status; 
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getErrorCode());
+            return ex.getErrorCode();
+            
+          }
+        }
+    
+    public List<produtos> listarProdutosVendidos() {
+    List<produtos> lista = new ArrayList<>();
+    try {
+        
+        st = conn.prepareStatement("SELECT * FROM produtos WHERE status = 'Vendido' ");
+        
+        
+        rs = st.executeQuery();
+        
+        while (rs.next()) {
+            produtos g = new produtos();
+            g.setId(rs.getInt("id")); 
+            g.setNome(rs.getString("nome"));
+            g.setValor(rs.getDouble("valor")); 
+            g.setStatus(rs.getString("status"));
+            lista.add(g);
+        }
+    } catch (SQLException ex) {
+        System.out.println("Erro ao consultar: " + ex.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (st != null) st.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao fechar recursos: " + e.getMessage());
+        }
+    }
+    return lista;
+}
+    
+    
     public void desconectar(){
         try {
             conn.close();
