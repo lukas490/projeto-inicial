@@ -74,6 +74,23 @@ public class produtosDao {
     return lista;
 }
     
+    public int venderProduto(produtos p){
+        int status;
+
+            try {
+            st = conn.prepareStatement("UPDATE produtos SET status = ? where id = ?");
+            st.setString(1,p.getStatus());
+            st.setInt(2,p.getId());
+            status = st.executeUpdate();
+            return status; 
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getErrorCode());
+            return ex.getErrorCode();
+            
+          }
+        }
+    
     public void desconectar(){
         try {
             conn.close();
