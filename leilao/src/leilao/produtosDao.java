@@ -79,7 +79,7 @@ public class produtosDao {
 
             try {
             st = conn.prepareStatement("UPDATE produtos SET status = ? where id = ?");
-            st.setString(1,p.getStatus());
+            st.setString(1, "Vendido");
             st.setInt(2,p.getId());
             status = st.executeUpdate();
             return status; 
@@ -90,6 +90,37 @@ public class produtosDao {
             
           }
         }
+    
+    public List<produtos> listarProdutosVendidos() {
+    List<produtos> lista = new ArrayList<>();
+    try {
+        
+        st = conn.prepareStatement("SELECT * FROM produtos WHERE status = Vendido");
+        
+        
+        rs = st.executeQuery();
+        
+        while (rs.next()) {
+            produtos p = new produtos();
+            p.setId(rs.getInt("id")); 
+            p.setNome(rs.getString("nome"));
+            p.setValor(rs.getDouble("valor")); 
+            p.setStatus(rs.getString("status"));
+            lista.add(p);
+        }
+    } catch (SQLException ex) {
+        System.out.println("Erro ao consultar: " + ex.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (st != null) st.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao fechar recursos: " + e.getMessage());
+        }
+    }
+    return lista;
+}
+    
     
     public void desconectar(){
         try {
