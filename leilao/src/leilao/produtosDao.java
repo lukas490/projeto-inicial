@@ -101,12 +101,12 @@ public class produtosDao {
         rs = st.executeQuery();
         
         while (rs.next()) {
-            produtos p = new produtos();
-            p.setId(rs.getInt("id")); 
-            p.setNome(rs.getString("nome"));
-            p.setValor(rs.getDouble("valor")); 
-            p.setStatus(rs.getString("status"));
-            lista.add(p);
+            produtos g = new produtos();
+            g.setId(rs.getInt("id")); 
+            g.setNome(rs.getString("nome"));
+            g.setValor(rs.getDouble("valor")); 
+            g.setStatus(rs.getString("status"));
+            lista.add(g);
         }
     } catch (SQLException ex) {
         System.out.println("Erro ao consultar: " + ex.getMessage());

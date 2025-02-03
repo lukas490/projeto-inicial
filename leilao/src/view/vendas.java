@@ -4,6 +4,11 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import leilao.produtos;
+import leilao.produtosDao;
+
 /**
  *
  * @author Lucas Boff
@@ -15,6 +20,31 @@ public class vendas extends javax.swing.JFrame {
      */
     public vendas() {
         initComponents();
+        
+      produtosDao dao = new produtosDao();
+      dao.conectar();
+      List<produtos>  g = dao.consultar();
+      preencheTabela(g);
+      dao.desconectar();
+    }
+    
+    public void preencheTabela(List<produtos> r){
+    String colunas[] = {"id", "nome", "valor", "status"};
+    String dados[][] = new String[r.size()][colunas.length];
+
+    int i=0;
+    for(produtos p: r){
+        dados[i] = new String[]{ 
+            String.valueOf(p.getId()), 
+            p.getNome(), 
+            String.valueOf(p.getValor()), 
+            p.getStatus(),
+        };
+        i++;
+    }
+
+    DefaultTableModel model = new DefaultTableModel(dados, colunas);
+    tbVendas.setModel(model);
     }
 
     /**
@@ -29,14 +59,14 @@ public class vendas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbVendas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("VENDAS");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -44,10 +74,10 @@ public class vendas extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id", "nome", "valor", "status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbVendas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,6 +156,6 @@ public class vendas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbVendas;
     // End of variables declaration//GEN-END:variables
 }
